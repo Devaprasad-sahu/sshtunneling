@@ -1,0 +1,16 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: Installs nginx web server
+    apt:
+      name: nginx
+      state: present
+      update_cache: true
+    notify:
+    - start nginx
+  handlers:
+  - name: start nginx
+    service:
+      name: nginx
+      state: present
